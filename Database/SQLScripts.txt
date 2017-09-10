@@ -1,0 +1,149 @@
+//Creating Database
+
+CREATE DATABASE StudentNetwork
+
+//Creating Tables
+
+//User Table
+CREATE TABLE users (
+userId     INT(8) NOT NULL AUTO_INCREMENT,
+userName   VARCHAR(30) NOT NULL,
+userPass   VARCHAR(255) NOT NULL,
+userEmail  VARCHAR(255) NOT NULL,
+userDate   DATETIME NOT NULL,
+userLevel  INT(8) NOT NULL,
+UNIQUE INDEX userNameUnique (userName),
+PRIMARY KEY (userId)
+) ENGINE=INNODB;
+
+//Category Table
+CREATE TABLE JobCategories (
+JobCatId          INT(8) NOT NULL AUTO_INCREMENT,
+JobCatName        VARCHAR(255) NOT NULL,
+JobCatDescription     VARCHAR(255) NOT NULL,
+UNIQUE INDEX JobCatNameUnique (JobCatName),
+PRIMARY KEY (JobCatId)
+) Engine=INNODB;
+
+//Job Table
+CREATE TABLE Jobs (
+JobId        INT(8) NOT NULL AUTO_INCREMENT,
+JobSubject       VARCHAR(255) NOT NULL,
+JobDate      DATETIME NOT NULL,
+JobCat       INT(8) NOT NULL,
+JobPostBy        INT(8) NOT NULL,
+PRIMARY KEY (JobId)
+) Engine=INNODB;
+
+//JobPost
+CREATE TABLE IndividualJobPost  (
+JobPostId         INT(8) NOT NULL AUTO_INCREMENT,
+JobPostContent        TEXT NOT NULL,
+JobPostDate       DATETIME NOT NULL,
+JobPostTopic      INT(8) NOT NULL,
+JobPostBy     INT(8) NOT NULL,
+PRIMARY KEY (JobPostId)
+) Engine=INNODB;
+
+//Link Job table to categories
+ALTER TABLE Jobs ADD FOREIGN KEY(JobCat) REFERENCES categories(JobCatId) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+
+Let's link the topics to the user who creates one.
+ALTER TABLE Jobs ADD FOREIGN KEY(JobPostBy) REFERENCES users(userId) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+Link the posts to the topics:
+ALTER TABLE IndividualJobPost ADD FOREIGN KEY(JobPostTopic) REFERENCES Jobs(JobId) ON DELETE CASCADE ON UPDATE CASCADE;
+
+And finally, link each post to the user who made it:
+ALTER TABLE IndividualJobPost  ADD FOREIGN KEY(JobPostBy     ) REFERENCES users(userId) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Login</title>
+<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+
+<div class="container">
+
+ <div id="login-form">
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
+    
+     <div class="col-md-12">
+        
+         <div class="form-group">
+             <h2 class="">Sign In.</h2>
+            </div>
+        
+         <div class="form-group">
+             <hr />
+            </div>
+            
+            <?php
+   if ( isset($errMSG) ) {
+    
+    ?>
+    <div class="form-group">
+             <div class="alert alert-danger">
+    <span class="glyphicon glyphicon-info-sign"></span> <?php echo $errMSG; ?>
+                </div>
+             </div>
+                <?php
+   }
+   ?>
+            
+            <div class="form-group">
+             <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+             <input type="email" name="email" class="form-control" placeholder="Your Email" value="<?php echo $email; ?>" maxlength="40" />
+                </div>
+                <span class="text-danger"><?php echo $emailError; ?></span>
+            </div>
+            
+            <div class="form-group">
+             <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+             <input type="password" name="pass" class="form-control" placeholder="Your Password" maxlength="15" />
+                </div>
+                <span class="text-danger"><?php echo $passError; ?></span>
+            </div>
+            
+            <div class="form-group">
+             <hr />
+            </div>
+            
+            <div class="form-group">
+             <button type="submit" class="btn btn-block btn-primary" name="btn-login">Sign In</button>
+            </div>
+            
+            <div class="form-group">
+             <hr />
+            </div>
+            
+            <div class="form-group">
+             <a href="Register.php">Sign Up Here...</a>
+            </div>
+        
+        </div>
+   
+    </form>
+    </div> 
+
+</div>
+  <!-- jQuery first, then Tether, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+
+</body>
+</html>
+<?php ob_end_flush(); ?>

@@ -1,0 +1,34 @@
+/*Fonts*/
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+
+/* JOBS */
+.category-title {
+    text-align: center;
+    margin-bottom: 5%;
+    font-family: Lato, 'sans-serif';
+}
+
+.bg-category {
+    background-color:#3F8A8C;
+    color: white;
+}
+
+.container {
+    width: 80%;
+}
+
+.category-button-area {
+    margin-bottom: 10px;
+}
+
+.category-button {
+    background-color: #4AA1D8;
+    border:none;
+    color:white;
+}
+
+.category-button:hover {
+    color: white;
+    background-color:#24545C;
+}

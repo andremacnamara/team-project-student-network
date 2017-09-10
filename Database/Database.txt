@@ -1,0 +1,7 @@
+mysql-ctl install
+phpmyadmin-ctl install
+mysql-ctl start
+
+https://teamproject-andremac96.c9users.io/phpmyadmin
+
+https://www.youtube.com/watch?v=qy2-d8uAn2k  <-- killos

@@ -1,0 +1,101 @@
+body {
+    background-color: #ddd;
+}
+
+textarea {
+    width: 806px;
+    height: 120px;
+    background-color: #fff;
+    resize:both;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+button {
+    width: 140px;
+    height: 40px;
+    background-color: #282828;
+    border: none;
+    color: #fff;
+    font-family: arial;
+    font-weight: 400;
+    cursor: pointer;
+    margin-bottom:20px;
+} 
+.comment-box {
+    width:815px;
+    padding:20px;
+    margin-bottom: 4px;
+    background-color: #fff;
+    border-radius:4px;
+    position: relative;
+}
+
+
+
+.comment-box {
+   font-family: arial;
+   font-size: 14px;
+   line-height: 16px;
+   color: #282828;
+   font-weight: 100;
+   
+}
+
+.edit-form {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    
+}
+
+.edit-form button {
+   width: 40px;
+   height: 20px;
+   color: #282828;
+   background-color: #fff;
+   opacity: 0.7;
+    
+}
+.edit-form button:hover {
+ opacity: 1;
+    
+}
+
+
+
+.delete-form {
+    position: absolute;
+    top: 0px;
+    right: 60px;
+    
+}
+
+.delete-form button {
+   width: 40px;
+   height: 20px;
+   color: #282828;
+   background-color: #fff;
+   opacity: 0.7;
+    
+}
+.delete-form button:hover {
+ opacity: 1;
+    
+}
+
+.container{
+    position: relative;
+}
+
+.footer-below {
+    padding: 25px 0;
+    background-color: #233140;
+    color: white;
+}
+    
+    
+    
+    
+    
